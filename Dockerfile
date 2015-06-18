@@ -28,11 +28,12 @@ RUN wget ftp://ftp.idsoftware.com/idstuff/quake3/linux/linuxq3apoint-1.32b-3.x86
 RUN sh linuxq3apoint-1.32b-3.x86.run --nox11 --target /usr/lib/ioquake3
 RUN ln -s /pak0.pk3 /usr/lib/ioquake3/baseq3/pak0.pk3
 
+# Entrypoint
+COPY entrypoint.sh /
+RUN chmod a+x /entrypoint.sh
+
 # Switch to an unprivileged user
 RUN useradd -G video -m unamedplayer
 USER unamedplayer
 
-# Entrypoint
-COPY entrypoint.sh /
-RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
