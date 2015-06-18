@@ -9,5 +9,11 @@ if [ ! -f $PKPATH ]; then
     exit 1
 fi
 
-# Run ioquake
-/usr/lib/ioquake3/ioquake3 $*
+case $1 in
+server)
+    /usr/lib/ioquake3/ioq3ded "${@:2}"
+    ;;
+*)
+    /usr/lib/ioquake3/ioquake3 "$@"
+    ;;
+esac

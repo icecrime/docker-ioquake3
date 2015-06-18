@@ -7,7 +7,7 @@
 # Example usage:
 #
 # $ docker run \
-#       --rm                                \
+#       --rm -ti                            \
 #       --device=/dev/dri                   \
 #       -e DISPLAY=$DISPLAY                 \
 #       -v $HOME/.q3a:/unamedplayer/.q3a    \
@@ -21,6 +21,7 @@ MAINTAINER icecrime@docker.com
 # Install ioquake3 Ubuntu package
 RUN apt-get update && apt-get install -y    \
         ioquake3                            \
+        ioquake3-server                     \
         wget
 
 # Get the point release from ID Software (holds the pk3 files)
