@@ -15,14 +15,15 @@
 #
 # Example client usage:
 #
-#     $ docker run                              \
-#           --rm                                \
-#           --device=/dev/dri                   \
-#           --link q3srv:q3srv                  \
-#           -e DISPLAY=$DISPLAY                 \
-#           -v $HOME/.q3a:/unamedplayer/.q3a    \
-#           -v /path/to/pak0.pk3:/pak0.pk3      \
-#           -v /tmp/.X11-unix:/tmp/.X11-unix    \
+#     $ docker run                                  \
+#           --rm                                    \
+#           --device=/dev/dri                       \
+#           --device=/dev/snd                       \
+#           --link q3srv:q3srv                      \
+#           -e DISPLAY=$DISPLAY                     \
+#           -v $HOME/.q3a:/home/unamedplayer/.q3a   \
+#           -v /path/to/pak0.pk3:/pak0.pk3          \
+#           -v /tmp/.X11-unix:/tmp/.X11-unix        \
 #           ioquake3 +connect q3srv:27960
 
 FROM ubuntu:15.04
@@ -44,7 +45,7 @@ COPY entrypoint.sh /
 RUN chmod a+x /entrypoint.sh
 
 # Switch to an unprivileged user
-RUN useradd -G video -m unamedplayer
+RUN useradd -G audio,video -m unamedplayer
 USER unamedplayer
 
 ENTRYPOINT ["/entrypoint.sh"]
